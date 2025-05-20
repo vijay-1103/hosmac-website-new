@@ -13,7 +13,8 @@ const services = [
       "Structural Engineering", 
       "Interior Design",
       "Landscape Integration"
-    ]
+    ],
+    imagePath: "" // Will be updated with actual path
   },
   {
     id: "mepf",
@@ -24,7 +25,8 @@ const services = [
       "Electrical Engineering",
       "Plumbing & Sanitary",
       "Firefighting & Safety"
-    ]
+    ],
+    imagePath: "" // Will be updated with actual path
   },
   {
     id: "biomedical",
@@ -35,7 +37,8 @@ const services = [
       "Biomedical Integration",
       "Project Management",
       "Commissioning & Validation"
-    ]
+    ],
+    imagePath: "" // Will be updated with actual path
   }
 ];
 
@@ -70,12 +73,12 @@ const ServicesPage = () => {
         <h1 className="text-4xl font-light mb-12">Our Services</h1>
         
         <Tabs defaultValue="turnkey" className="w-full" onValueChange={setActiveTab}>
-          <TabsList className="w-full justify-start border-b mb-8">
+          <TabsList className="w-full justify-start border-b mb-8 bg-transparent">
             {services.map((service) => (
               <TabsTrigger 
                 key={service.id}
                 value={service.id}
-                className="text-lg px-8 py-4 data-[state=active]:border-b-2 data-[state=active]:border-primary"
+                className="text-lg px-8 py-4 data-[state=active]:border-b-2 data-[state=active]:border-primary data-[state=active]:bg-transparent bg-transparent"
               >
                 {service.name}
               </TabsTrigger>
@@ -102,12 +105,18 @@ const ServicesPage = () => {
                     ))}
                   </ul>
                 </div>
-                <div>
-                  <img 
-                    src={`https://source.unsplash.com/featured/?${service.name.toLowerCase().replace(/&/g, '')}`}
-                    alt={service.name}
-                    className="w-full h-[400px] object-cover"
-                  />
+                <div className="relative h-[400px] overflow-hidden">
+                  {service.imagePath ? (
+                    <img 
+                      src={service.imagePath}
+                      alt={service.name}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-gray-100 flex items-center justify-center">
+                      <p className="text-gray-400">Image will be added</p>
+                    </div>
+                  )}
                 </div>
               </motion.div>
             </TabsContent>
