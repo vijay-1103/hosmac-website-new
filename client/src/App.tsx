@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";import NotFound from "
 import Home from "@/pages/Home";
 import ProjectsPage from "@/pages/Home2";
 import ProjectDetail from "@/pages/ProjectDetail";
+import ServicesPage from "@/pages/ServicesPage";
 import { ThemeProvider } from "next-themes";
 
 
