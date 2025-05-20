@@ -5,6 +5,15 @@ import SearchBar from "@/components/SearchBar";
 const ServicesPage = () => {
   return (
     <div className="min-h-screen bg-white">
+      <div className="bg-[#F5F5F5] py-3 border-b border-gray-200">
+        <div className="container mx-auto px-4">
+          <div className="flex text-sm text-gray-500">
+            <a href="/" className="hover:text-primary">Home</a>
+            <span className="mx-5">/</span>
+            <span className="text-primary">Services</span>
+          </div>
+        </div>
+      </div>
       <div className="container mx-auto px-4 py-24">
         <h1 className="text-4xl font-light mb-12">Our Services</h1>
         <SearchBar onSearch={() => {}} />
