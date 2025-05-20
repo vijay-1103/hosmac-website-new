@@ -1,45 +1,20 @@
-import { useState } from "react";
-import { Search } from "lucide-react";
-import { Input } from "@/components/ui/input";
-
 interface SearchBarProps {
   onSearch: (term: string) => void;
 }
 
-export default function SearchBar({ onSearch }: SearchBarProps) {
-  const [searchTerm, setSearchTerm] = useState("");
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    onSearch(searchTerm);
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value);
-    if (e.target.value === "") {
-      onSearch("");
-    }
-  };
-
+const SearchBar = ({ onSearch }: SearchBarProps) => {
   return (
-    <div className="bg-white py-4 border-b border-gray-200">
+    <div className="py-8 bg-[#F5F5F5]">
       <div className="container mx-auto px-4">
-        <form onSubmit={handleSubmit} className="relative">
-          <Input
-            type="text"
-            placeholder="Search projects by name, location, or type..."
-            className="w-full px-4 py-3 pl-10 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-            value={searchTerm}
-            onChange={handleChange}
-          />
-          <button 
-            type="submit" 
-            className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-primary"
-          >
-            <Search className="h-5 w-5" />
-          </button>
-        </form>
+        <input
+          type="text"
+          placeholder="Search..."
+          onChange={(e) => onSearch(e.target.value)}
+          className="w-full max-w-lg px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary"
+        />
       </div>
     </div>
   );
-}
+};
+
+export default SearchBar;

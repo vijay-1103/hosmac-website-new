@@ -1,13 +1,13 @@
 
 import { motion } from "framer-motion";
-import { SearchBar } from "@/components/SearchBar";
+import SearchBar from "@/components/SearchBar";
 
 const ServicesPage = () => {
   return (
     <div className="min-h-screen bg-white">
       <div className="container mx-auto px-4 py-24">
         <h1 className="text-4xl font-light mb-12">Our Services</h1>
-        <SearchBar />
+        <SearchBar onSearch={() => {}} />
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-12">
           <div>
