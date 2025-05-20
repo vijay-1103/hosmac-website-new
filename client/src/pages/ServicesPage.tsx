@@ -1,8 +1,47 @@
 
+import { useState } from "react";
 import { motion } from "framer-motion";
-import SearchBar from "@/components/SearchBar";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+
+const services = [
+  {
+    id: "turnkey",
+    name: "Turnkey Design",
+    description: "Comprehensive architectural design solutions tailored specifically for healthcare environments, from conceptual development to detailed specifications.",
+    features: [
+      "Architectural Planning",
+      "Structural Engineering", 
+      "Interior Design",
+      "Landscape Integration"
+    ]
+  },
+  {
+    id: "mepf",
+    name: "MEPF Systems",
+    description: "Advanced engineering solutions that create optimal healing environments with superior efficiency, safety, and sustainability.",
+    features: [
+      "Mechanical & HVAC Systems",
+      "Electrical Engineering",
+      "Plumbing & Sanitary",
+      "Firefighting & Safety"
+    ]
+  },
+  {
+    id: "biomedical",
+    name: "Biomedical & PMC",
+    description: "Specialized healthcare technology integration and comprehensive project management services for complex medical facilities.",
+    features: [
+      "Medical Equipment Planning",
+      "Biomedical Integration",
+      "Project Management",
+      "Commissioning & Validation"
+    ]
+  }
+];
 
 const ServicesPage = () => {
+  const [activeTab, setActiveTab] = useState("turnkey");
+
   return (
     <div className="min-h-screen bg-white">
       <div className="bg-[#F5F5F5] py-3 border-b border-gray-200">
@@ -14,65 +53,66 @@ const ServicesPage = () => {
           </div>
         </div>
       </div>
+
       <div className="container mx-auto px-4 py-24">
-        <h1 className="text-4xl font-light mb-12">Our Services</h1>
-        <SearchBar onSearch={() => {}} />
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-12">
-          <div>
-            <img 
-              src="https://images.unsplash.com/photo-1512678080530-7760d81faba6?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
-              alt="Turnkey Design" 
-              className="w-full h-64 object-cover mb-6"
-            />
-            <h3 className="text-2xl font-light mb-4">Turnkey Design</h3>
-            <p className="text-gray-700 mb-6">
-              Comprehensive architectural design solutions tailored specifically for healthcare environments, from conceptual development to detailed specifications.
-            </p>
-            <ul className="space-y-2 text-gray-700">
-              <li>• Architectural Planning</li>
-              <li>• Structural Engineering</li>
-              <li>• Interior Design</li>
-              <li>• Landscape Integration</li>
-            </ul>
-          </div>
-          
-          <div>
-            <img 
-              src="https://images.unsplash.com/photo-1581092921461-6dd24b6a758a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
-              alt="MEPF Systems" 
-              className="w-full h-64 object-cover mb-6"
-            />
-            <h3 className="text-2xl font-light mb-4">MEPF Systems</h3>
-            <p className="text-gray-700 mb-6">
-              Advanced engineering solutions that create optimal healing environments with superior efficiency, safety, and sustainability.
-            </p>
-            <ul className="space-y-2 text-gray-700">
-              <li>• Mechanical & HVAC Systems</li>
-              <li>• Electrical Engineering</li>
-              <li>• Plumbing & Sanitary</li>
-              <li>• Firefighting & Safety</li>
-            </ul>
-          </div>
-          
-          <div>
-            <img 
-              src="https://images.unsplash.com/photo-1530026186672-2cd00ffc50fe?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
-              alt="Biomedical & PMC" 
-              className="w-full h-64 object-cover mb-6"
-            />
-            <h3 className="text-2xl font-light mb-4">Biomedical & PMC</h3>
-            <p className="text-gray-700 mb-6">
-              Specialized healthcare technology integration and comprehensive project management services for complex medical facilities.
-            </p>
-            <ul className="space-y-2 text-gray-700">
-              <li>• Medical Equipment Planning</li>
-              <li>• Biomedical Integration</li>
-              <li>• Project Management</li>
-              <li>• Commissioning & Validation</li>
-            </ul>
-          </div>
+        {/* About Section */}
+        <div className="mb-20">
+          <h2 className="text-4xl font-light mb-6">About HOSMAC</h2>
+          <p className="text-lg text-gray-700 mb-8">
+            For over 25 years, HOSMAC has been a leading healthcare design consultancy, creating innovative medical facilities that enhance patient care and clinical excellence.
+          </p>
+          <p className="text-gray-700 mb-8">
+            Our multidisciplinary team of architects, engineers, and healthcare specialists brings expertise in turnkey design, MEPF systems, biomedical equipment planning, and project management to create comprehensive healthcare environments.
+          </p>
         </div>
+
+        {/* Services Tabs */}
+        <h1 className="text-4xl font-light mb-12">Our Services</h1>
+        
+        <Tabs defaultValue="turnkey" className="w-full" onValueChange={setActiveTab}>
+          <TabsList className="w-full justify-start border-b mb-8">
+            {services.map((service) => (
+              <TabsTrigger 
+                key={service.id}
+                value={service.id}
+                className="text-lg px-8 py-4 data-[state=active]:border-b-2 data-[state=active]:border-primary"
+              >
+                {service.name}
+              </TabsTrigger>
+            ))}
+          </TabsList>
+
+          {services.map((service) => (
+            <TabsContent key={service.id} value={service.id}>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="grid grid-cols-1 md:grid-cols-2 gap-12"
+              >
+                <div>
+                  <h3 className="text-3xl font-light mb-6">{service.name}</h3>
+                  <p className="text-gray-700 mb-8">{service.description}</p>
+                  <ul className="space-y-4">
+                    {service.features.map((feature, index) => (
+                      <li key={index} className="flex items-center text-gray-700">
+                        <span className="mr-3">•</span>
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <img 
+                    src={`https://source.unsplash.com/featured/?${service.name.toLowerCase().replace(/&/g, '')}`}
+                    alt={service.name}
+                    className="w-full h-[400px] object-cover"
+                  />
+                </div>
+              </motion.div>
+            </TabsContent>
+          ))}
+        </Tabs>
       </div>
     </div>
   );
